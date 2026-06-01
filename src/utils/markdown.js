@@ -93,9 +93,3 @@ export function htmlToMarkdown(html) {
   return md.trim();
 }
 
-export function extractTextFromHtml(html) {
-  if (!html) return '';
-  const div = document.createElement('div');
-  div.innerHTML = html;
-  return div.textContent || '';
-}

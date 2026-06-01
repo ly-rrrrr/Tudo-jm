@@ -145,6 +145,8 @@ function reducer(state, action) {
       return { ...state, modalState: { open: true, taskId: action.taskId || null } };
     case 'CLOSE_MODAL':
       return { ...state, modalState: { open: false, taskId: null } };
+    case 'OPEN_MODAL_FOR_DATE':
+      return { ...state, currentDate: action.date, selectedDate: action.dateStr, modalState: { open: true, taskId: null } };
     case 'OPEN_SETTINGS':
       return { ...state, showSettings: true };
     case 'CLOSE_SETTINGS':

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'preact/hooks';
+import { useState, useEffect, useRef } from 'preact/hooks';
 import { useApp } from '../../context/AppContext.jsx';
 import './TaskModal.css';
 
@@ -42,7 +42,15 @@ export default function TaskModal() {
     }
   }, [isOpen, modalState.taskId, state.selectedDate]);
 
-  if (!isOpen) return null;
+  const [closing, setClosing] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) setClosing(false);
+  }, [isOpen]);
+
+  if (!isOpen && !closing) return null;
+
+  const close = () => { setClosing(true); setTimeout(() => dispatch({ type: 'CLOSE_MODAL' }), 200); };
 
   const handleChange = (field, value) => {
     setForm(prev => ({ ...prev, [field]: value }));
@@ -69,36 +77,32 @@ export default function TaskModal() {
         taskId: editingTask.id,
         updates: { ...form, order: editingTask.order },
       });
-    } else {
-      dispatch({ type: 'ADD_TASK', task: { ...form, order: Date.now() } });
     }
-    dispatch({ type: 'CLOSE_MODAL' });
+    close();
   };
 
   const handleDelete = () => {
     if (editingTask && confirm('Delete this task permanently?')) {
       dispatch({ type: 'DELETE_TASK', taskId: editingTask.id });
-      dispatch({ type: 'CLOSE_MODAL' });
+      close();
     }
   };
 
   const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) {
-      dispatch({ type: 'CLOSE_MODAL' });
-    }
+    if (e.target === e.currentTarget) close();
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Escape') dispatch({ type: 'CLOSE_MODAL' });
+    if (e.key === 'Escape') close();
     if (e.key === 'Enter' && e.ctrlKey) handleSave();
   };
 
   return (
-    <div class="modal-overlay" onClick={handleOverlayClick} onKeyDown={handleKeyDown}>
-      <div class="modal glass-panel animate-scale-in">
+    <div class={`modal-overlay ${closing ? 'animate-fade-out' : ''}`} onClick={handleOverlayClick} onKeyDown={handleKeyDown}>
+      <div class={`modal glass-panel ${closing ? 'animate-scale-out' : 'animate-scale-in'}`}>
         <div class="modal-header">
           <h3 class="modal-title">{editingTask ? 'Edit Task' : 'New Task'}</h3>
-          <button class="modal-close" onClick={() => dispatch({ type: 'CLOSE_MODAL' })}>
+          <button class="modal-close" onClick={close}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
@@ -187,7 +191,7 @@ export default function TaskModal() {
             <button class="modal-btn danger" onClick={handleDelete}>Delete</button>
           )}
           <div class="modal-footer-right">
-            <button class="modal-btn secondary" onClick={() => dispatch({ type: 'CLOSE_MODAL' })}>Cancel</button>
+            <button class="modal-btn secondary" onClick={close}>Cancel</button>
             <button class="modal-btn primary" onClick={handleSave}>
               {editingTask ? 'Save Changes' : 'Create Task'}
             </button>

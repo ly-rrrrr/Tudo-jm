@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { useApp } from '../context/AppContext.jsx';
 import { getMonthGrid, formatMonthYear, addMonths, formatDateShort, parseDateStr } from '../utils/dateUtils.js';
 import MonthView from './Calendar/MonthView.jsx';
@@ -18,36 +18,41 @@ function CalendarView() {
 export default function CalendarPopover() {
   const { state, dispatch } = useApp();
   const popoverRef = useRef(null);
-  const justOpenedRef = useRef(false);
+  const [closing, setClosing] = useState(false);
 
-  // Hooks MUST be called before any conditional return
   useEffect(() => {
-    if (!state.showCalendar) return;
-
-    justOpenedRef.current = true;
-    // Ignore clicks for the first 200ms after opening
-    const timer = setTimeout(() => { justOpenedRef.current = false; }, 200);
+    if (!state.showCalendar) { setClosing(false); return; }
+    setClosing(false);
 
     function handleClick(e) {
-      if (justOpenedRef.current) return;
-      if (popoverRef.current && !popoverRef.current.contains(e.target)) {
-        dispatch({ type: 'CLOSE_CALENDAR' });
+      if (popoverRef.current && !popoverRef.current.contains(e.target) && !e.target.closest('.header-icon-btn')) {
+        setClosing(true);
+        setTimeout(() => dispatch({ type: 'CLOSE_CALENDAR' }), 150);
+      }
+    }
+
+    function handleKey(e) {
+      if (e.key === 'Escape') {
+        setClosing(true);
+        setTimeout(() => dispatch({ type: 'CLOSE_CALENDAR' }), 150);
       }
     }
 
     document.addEventListener('click', handleClick);
+    document.addEventListener('keydown', handleKey);
     return () => {
-      clearTimeout(timer);
       document.removeEventListener('click', handleClick);
+      document.removeEventListener('keydown', handleKey);
     };
   }, [state.showCalendar]);
 
-  if (!state.showCalendar) return null;
+  if (!state.showCalendar && !closing) return null;
 
   const handleDateSelect = (date, dateStr) => {
     dispatch({ type: 'SET_DATE', date });
     dispatch({ type: 'SELECT_DATE', dateStr });
-    dispatch({ type: 'CLOSE_CALENDAR' });
+    setClosing(true);
+    setTimeout(() => dispatch({ type: 'CLOSE_CALENDAR' }), 150);
   };
 
   const views = ['month', 'week', 'day'];
@@ -66,7 +71,7 @@ export default function CalendarPopover() {
     .slice(0, 10);
 
   return (
-    <div class="cal-popover animate-scale-in" ref={popoverRef}>
+    <div class={`cal-popover ${closing ? 'animate-scale-out' : 'animate-scale-in'}`} ref={popoverRef}>
       {/* View Switcher */}
       <div class="cal-pop-view-switcher">
         {views.map(v => (

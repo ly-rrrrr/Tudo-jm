@@ -87,32 +87,3 @@
   color: var(--text-dim);
   line-height: 1;
 }
-
-.day-cell.compact {
-  min-height: unset;
-  aspect-ratio: 1;
-  padding: 2px;
-  border-radius: var(--radius-sm);
-}
-
-.day-cell.compact .day-cell-num {
-  font-size: 0.7rem;
-}
-
-.compact-dot {
-  position: absolute;
-  bottom: 2px;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--cyan-primary);
-}
-
-.compact-dot.overdue {
-  background: var(--danger-red);
-  box-shadow: 0 0 4px var(--danger-glow);
-}
-
-.compact-dot.all-done {
-  background: var(--success-green);
-}

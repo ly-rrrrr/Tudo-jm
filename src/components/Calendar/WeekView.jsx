@@ -1,15 +1,7 @@
 import { useApp } from '../../context/AppContext.jsx';
 import { getWeekRange, toDateStr } from '../../utils/dateUtils.js';
+import { HOURS, formatHour } from '../../utils/timeUtils.js';
 import './WeekView.css';
-
-const HOURS = Array.from({ length: 24 }, (_, i) => i);
-
-function formatHour(h) {
-  if (h === 0) return '12 AM';
-  if (h < 12) return `${h} AM`;
-  if (h === 12) return '12 PM';
-  return `${h - 12} PM`;
-}
 
 export default function WeekView() {
   const { state, dispatch, getTasksForDate } = useApp();
@@ -40,14 +32,7 @@ export default function WeekView() {
               <div
                 key={`${d.dateStr}-${h}`}
                 class="week-hour-slot"
-                onClick={() => {
-                  dispatch({ type: 'SET_DATE', date: d.date });
-                  dispatch({ type: 'SELECT_DATE', dateStr: d.dateStr });
-                  dispatch({
-                    type: 'OPEN_MODAL',
-                    taskId: null,
-                  });
-                }}
+                onClick={() => dispatch({ type: 'OPEN_MODAL_FOR_DATE', date: d.date, dateStr: d.dateStr })}
               />
             ))
           ))}

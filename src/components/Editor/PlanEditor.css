@@ -36,7 +36,7 @@
 }
 
 .plan-notes-section {
-  flex: 1;
+  flex: 3;
   min-height: 0;
   overflow: hidden;
 }
@@ -198,4 +198,5 @@
   overflow-y: auto;
   background: var(--panel-bg);
   min-height: 0;
+  max-height: 35vh;
 }

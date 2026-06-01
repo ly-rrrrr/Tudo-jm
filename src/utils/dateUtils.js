@@ -26,7 +26,11 @@ export function firstDayOfMonth(year, month, firstDayOfWeek = 0) {
   return dow;
 }
 
+let _gridCache = null;
+
 export function getMonthGrid(year, month, firstDayOfWeek = 0) {
+  const cacheKey = `${year}-${month}-${firstDayOfWeek}`;
+  if (_gridCache && _gridCache.key === cacheKey) return _gridCache.grid;
   const totalDays = daysInMonth(year, month);
   const startOffset = firstDayOfMonth(year, month, firstDayOfWeek);
   const todayStr = toDateStr(today());
@@ -73,6 +77,7 @@ export function getMonthGrid(year, month, firstDayOfWeek = 0) {
     });
   }
 
+  _gridCache = { key: cacheKey, grid: cells };
   return cells;
 }
 

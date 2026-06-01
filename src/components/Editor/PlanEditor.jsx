@@ -27,7 +27,8 @@ export default function PlanEditor() {
       <EditorToolbar />
       <div class="plan-editor-content">
         <div class="plan-notes-section">
-          {editorMode === 'richtext' ? <RichTextEditor /> : <MarkdownEditor />}
+          <div style={{ display: editorMode === 'markdown' ? 'contents' : 'none' }}><MarkdownEditor /></div>
+          <div style={{ display: editorMode === 'richtext' ? 'contents' : 'none' }}><RichTextEditor /></div>
         </div>
         <div class="plan-tasks-section">
           <TaskList />

@@ -2,7 +2,7 @@ import { useApp } from '../../context/AppContext.jsx';
 import { today, toDateStr } from '../../utils/dateUtils.js';
 import './DayCell.css';
 
-export default function DayCell({ cell, compact }) {
+export default function DayCell({ cell }) {
   const { state, dispatch, getTasksForDate } = useApp();
   const tasks = getTasksForDate(cell.dateStr);
   const isSelected = cell.dateStr === state.selectedDate;
@@ -12,41 +12,30 @@ export default function DayCell({ cell, compact }) {
   const isPast = cell.dateStr < toDateStr(today());
   const hasOverdue = isPast && hasTasks && completedCount < tasks.length;
 
-  const handleClick = () => {
-    dispatch({ type: 'SET_DATE', date: cell.date });
-    dispatch({ type: 'SELECT_DATE', dateStr: cell.dateStr });
-  };
-
-  const handleDoubleClick = () => {
-    dispatch({ type: 'SET_DATE', date: cell.date });
-    dispatch({ type: 'SELECT_DATE', dateStr: cell.dateStr });
-    dispatch({ type: 'OPEN_MODAL', taskId: null });
-  };
-
   const cellClass = [
     'day-cell',
     !cell.isCurrentMonth && 'other-month',
     cell.isToday && 'today',
     isSelected && 'selected',
     hasOverdue && 'has-overdue',
-    compact && 'compact',
   ].filter(Boolean).join(' ');
 
   return (
-    <button class={cellClass} onClick={handleClick} onDblClick={handleDoubleClick}>
+    <button
+      class={cellClass}
+      onClick={() => { dispatch({ type: 'SET_DATE', date: cell.date }); dispatch({ type: 'SELECT_DATE', dateStr: cell.dateStr }); }}
+      onDblClick={() => dispatch({ type: 'OPEN_MODAL_FOR_DATE', date: cell.date, dateStr: cell.dateStr })}
+    >
       <span class="day-cell-num">{cell.day}</span>
-      {hasTasks && !compact && (
+      {hasTasks && (
         <div class="day-cell-dots">
           {allComplete && <span class="dot all-complete" />}
           {hasOverdue && <span class="dot overdue" />}
-          {!allComplete && !hasOverdue && tasks.slice(0, 3).map((t, i) => (
+          {!allComplete && !hasOverdue && tasks.slice(0, 3).map((t) => (
             <span key={t.id} class={`dot priority-${t.priority} ${t.completed ? 'done' : ''}`} />
           ))}
           {tasks.length > 3 && <span class="dot-more">+{tasks.length - 3}</span>}
         </div>
-      )}
-      {hasTasks && compact && (
-        <span class={`compact-dot ${hasOverdue ? 'overdue' : ''} ${allComplete ? 'all-done' : ''}`} />
       )}
     </button>
   );

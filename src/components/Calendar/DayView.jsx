@@ -1,15 +1,6 @@
 import { useApp } from '../../context/AppContext.jsx';
-import { toDateStr } from '../../utils/dateUtils.js';
+import { HOURS, formatHour } from '../../utils/timeUtils.js';
 import './DayView.css';
-
-const HOURS = Array.from({ length: 24 }, (_, i) => i);
-
-function formatHour(h) {
-  if (h === 0) return '12 AM';
-  if (h < 12) return `${h} AM`;
-  if (h === 12) return '12 PM';
-  return `${h - 12} PM`;
-}
 
 export default function DayView() {
   const { state, dispatch, getTasksForDate } = useApp();
@@ -62,13 +53,7 @@ export default function DayView() {
             <div
               key={h}
               class="day-hour-slot"
-              onClick={() => {
-                const timeStr = `${String(h).padStart(2, '0')}:00`;
-                dispatch({
-                  type: 'OPEN_MODAL',
-                  taskId: null,
-                });
-              }}
+              onClick={() => dispatch({ type: 'OPEN_MODAL_FOR_DATE', date: state.currentDate, dateStr })}
             />
           ))}
           {timedTasks.map(task => {

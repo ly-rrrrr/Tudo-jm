@@ -5,9 +5,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--overlay-bg);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: transparent;
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
+  transition: background var(--transition-normal), backdrop-filter var(--transition-normal);
+  animation: fade-in var(--transition-normal) forwards;
+}
+
+.modal-overlay.animate-fade-out {
+  animation: fade-out var(--transition-normal) forwards;
+}
+
+@keyframes fade-in {
+  from { background: transparent; backdrop-filter: blur(0); -webkit-backdrop-filter: blur(0); }
+  to { background: var(--overlay-bg); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
 }
 
 .modal {

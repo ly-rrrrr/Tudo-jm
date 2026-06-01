@@ -2,12 +2,13 @@ import { useApp } from '../context/AppContext.jsx';
 import { formatMonthYear, toDateStr, today } from '../utils/dateUtils.js';
 import './Header.css';
 
-function getHeaderTitle(date, view) {
+function getHeaderTitle(date, view, firstDayOfWeek) {
   switch (view) {
     case 'week': {
       const start = new Date(date);
       const day = start.getDay();
-      start.setDate(start.getDate() - day);
+      const diff = (day - firstDayOfWeek + 7) % 7;
+      start.setDate(start.getDate() - diff);
       const end = new Date(start);
       end.setDate(start.getDate() + 6);
       const startStr = start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
@@ -23,7 +24,7 @@ function getHeaderTitle(date, view) {
 
 export default function Header() {
   const { state, dispatch, navigateBack, navigateForward, goToday } = useApp();
-  const title = getHeaderTitle(state.currentDate, state.currentView);
+  const title = getHeaderTitle(state.currentDate, state.currentView, state.settings.firstDayOfWeek);
 
   return (
     <header class="app-header">
