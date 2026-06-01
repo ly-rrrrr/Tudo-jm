@@ -1,15 +1,9 @@
-<p align="center">
-  <samp><b>SELECT LANGUAGE · 选择语言</b></samp><br><br>
-  <a href="#english"><b>ENGLISH</b></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="#chinese"><b>中文</b></a>
-</p>
+<p align="right"><sub><a href="README_zh.md">中文</a></sub></p>
 
----
-
-<h1 align="center">Tudo — Daily Planner · 每日规划器</h1>
+<h1 align="center">Tudo — Daily Planner</h1>
 
 <p align="center">
-  <b>Three-Body Sci-Fi Aesthetic</b> · dark cosmos · cyan glows · starfield canvas<br>
-  <b>《三体》科幻风格</b> · 深空 · 青色辉光 · 星空画布
+  <b>Three-Body Sci-Fi Aesthetic</b> · dark cosmos · cyan glows · starfield canvas
 </p>
 
 <p align="center">
@@ -17,10 +11,6 @@
 </p>
 
 ---
-
-## <a id="english"></a> English &ensp; [↑ top](#)
-
-> Click **[中文](#chinese)** above to switch language &ensp;·&ensp; 点击上方 **[中文](#chinese)** 切换语言
 
 ### Features
 
@@ -227,121 +217,3 @@ src/
 ### License
 
 MIT — see [LICENSE](LICENSE).
-
----
-
-## <a id="chinese"></a> 中文 &ensp; [↑ top](#)
-
-> 点击上方 **[ENGLISH](#english)** 切换语言 &ensp;·&ensp; Click **[ENGLISH](#english)** above to switch language
-
-### 功能
-
-| 分类 | 说明 |
-|------|------|
-| 每日规划 | Markdown / 富文本双模式编辑器，写笔记、列计划 |
-| 任务管理 | 创建、编辑、完成、删除任务，支持优先级（高/中/低）和时段 |
-| 日历视图 | 月视图（6×7 网格）、周视图（7 列 × 24 小时时间块）、日视图 |
-| 逾期提醒 | 过去未完成的任务在今日视图顶部显示警告横幅 |
-| 自动归档 | 已完成任务自动折叠，点击一键展开 |
-| 迷你日历 | 紧凑月份选择器，带任务圆点指示 |
-| 历史计划 | 快速跳转到之前规划过的日期列表 |
-| 纯本地 | 所有数据存 localStorage，无需服务器、无需注册 |
-
-### 界面预览
-
-请向上滚动至 [Visual Overview](#visual-overview) 查看四幅 ASCII 效果图。
-
-### 技术栈
-
-| 层 | 库 | 体积 (gzip) |
-|----|-----|-------------|
-| 框架 | [Preact](https://preactjs.com/) | ~4.5 KB |
-| Markdown | [marked](https://marked.js.org/) | ~20 KB |
-| 构建 | [Vite](https://vitejs.dev/) | 仅开发时 |
-
-**运行时 JS 总计 ~28 KB (gzip)**，无其他依赖。
-
-### 快速开始
-
-```bash
-npm install       # 安装依赖
-npm run dev       # 启动开发服务器 → http://localhost:5173
-npm run build     # 生产构建 → dist/
-npm run preview   # 预览生产构建
-```
-
-### 使用指南
-
-**每日规划**
-1. 打开即显示今日计划
-2. 在编辑区写笔记，支持 Markdown 或富文本模式
-3. 点击 **+ Task** 或双击日历格子添加任务
-4. 使用顶部左右箭头切换日期
-
-**日历** — 点击顶部日历图标打开弹窗
-- **月视图**：6×7 日期网格，彩色圆点 = 有任务，红色脉冲 = 逾期未完成
-- **周视图**：7 列 × 24 小时，带时段的任力显示为时间块
-- **日视图**：单列小时视图 + 顶部全天任务栏
-- **迷你日历**：主日历下方可快速切换月份
-- **历史计划**：点击任意条目跳转到对应日期
-
-**任务管理**
-- **创建**：点击 "+ Task" 按钮或双击日历格子
-- **编辑**：点击任意任务打开编辑弹窗
-- **完成**：点击复选框，任务自动归入「已完成」折叠区
-- **删除**：悬停任务，点击 ✕，确认后删除
-- **优先级**：高（红色）/ 中（橙色）/ 低（青色）
-- **时段**：可选开始/结束时间，在周/日视图中显示为时间块
-
-**编辑器模式**
-- **Markdown**：纯文本编辑，快捷键插入加粗 `**文字**`、标题 `##`、列表 `- 项目`。可切换预览面板。
-- **富文本**：所见即所得编辑，带格式工具栏。与 Markdown 模式互相自动转换。
-
-**逾期任务**
-- 过去日期有未完成任务 → 日历中显示红色脉冲圆点
-- 今日视图 → 顶部橙色警告横幅列出所有逾期任务
-- 点击任意逾期条目可编辑或重新安排日期
-
-### 键盘快捷键
-
-| 按键 | 操作 |
-|------|------|
-| `Esc` | 关闭弹窗 / 日历 |
-| `Ctrl + Enter` | 在弹窗中保存任务 |
-
-### 数据与隐私
-
-所有数据存储在浏览器 `localStorage` 中，不会发送到任何服务器。
-
-| 存储键 | 内容 |
-|--------|------|
-| `tudo_tasks` | 所有任务对象（按 ID 索引） |
-| `tudo_dayplans` | 每日计划（笔记 + 任务 ID 列表） |
-| `tudo_settings` | 用户偏好设置 |
-
-备份方法：DevTools → Application → Local Storage → 复制三个键的值。
-
-### 项目结构
-
-```
-src/
-├── context/AppContext.jsx      # 中心状态管理（Context + useReducer, 15 种 action）
-├── components/
-│   ├── Header.jsx               # 顶栏：Logo、日期导航、日历/设置图标
-│   ├── CalendarPopover.jsx      # 日历弹窗（视图 + 迷你日历 + 历史计划）
-│   ├── Starfield.jsx            # Canvas 星空背景动画（30fps, 80-300 颗星）
-│   ├── Calendar/                # MonthView, WeekView, DayView, DayCell
-│   ├── Editor/                  # PlanEditor, Markdown/RichText 编辑器, TaskList
-│   ├── TaskModal/               # 任务创建/编辑弹窗（玻璃质感）
-│   └── SettingsModal/           # 偏好设置弹窗
-├── utils/
-│   ├── dateUtils.js             # 日历计算 + 日期格式化
-│   ├── storage.js               # 带版本号的 localStorage 封装
-│   ├── markdown.js              # marked 封装 + 自写 HTML→Markdown 转换器
-│   └── id.js                    # crypto.randomUUID()
-└── styles/                      # 设计令牌、CSS Reset、排版、动画
-```
-
-### 开源协议
-
-MIT — 详见 [LICENSE](LICENSE)。
