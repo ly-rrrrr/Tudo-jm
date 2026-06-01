@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#080810"/>
+  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="36" font-weight="700" fill="#00e5ff" filter="url(#glow)">T</text>
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+</svg>

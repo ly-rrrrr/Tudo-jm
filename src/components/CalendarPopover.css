@@ -1,0 +1,209 @@
+.cal-popover {
+  position: absolute;
+  top: 52px;
+  right: 60px;
+  width: 380px;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 229, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 50;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* View Switcher inside popover */
+.cal-pop-view-switcher {
+  display: flex;
+  background: var(--void-blue);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 3px;
+}
+
+.cal-pop-view-btn {
+  flex: 1;
+  padding: 6px 0;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--text-dim);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.cal-pop-view-btn:hover {
+  color: var(--text-primary);
+}
+
+.cal-pop-view-btn.active {
+  background: rgba(0, 229, 255, 0.12);
+  color: var(--cyan-primary);
+}
+
+/* Calendar area */
+.cal-pop-calendar {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+/* Mini Calendar */
+.cal-pop-minical {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--space-md);
+}
+
+.cal-pop-minical-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.cal-pop-minical-title {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cal-pop-minical-nav {
+  color: var(--text-dim);
+  font-size: var(--text-lg);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast);
+}
+
+.cal-pop-minical-nav:hover {
+  color: var(--cyan-primary);
+}
+
+.cal-pop-minical-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.cal-pop-minical-dow {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 2px 0;
+  font-weight: 500;
+}
+
+.cal-pop-minical-cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.cal-pop-minical-cell:hover {
+  background: rgba(0, 229, 255, 0.08);
+  color: var(--text-primary);
+}
+
+.cal-pop-minical-cell.other-month {
+  color: var(--text-dim);
+  opacity: 0.35;
+}
+
+.cal-pop-minical-cell.today {
+  color: var(--cyan-primary);
+  font-weight: 700;
+}
+
+.cal-pop-minical-cell.selected {
+  background: rgba(0, 229, 255, 0.15);
+  color: var(--cyan-primary);
+  font-weight: 600;
+}
+
+.cal-pop-minical-dot {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--cyan-primary);
+}
+
+/* Plan List */
+.cal-pop-plans {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--space-md);
+}
+
+.cal-pop-plans-title {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-sm);
+}
+
+.cal-pop-plans-empty {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.cal-pop-plan-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  text-align: left;
+  width: 100%;
+  transition: background var(--transition-fast);
+}
+
+.cal-pop-plan-item:hover {
+  background: rgba(0, 229, 255, 0.06);
+}
+
+.cal-pop-plan-item.active {
+  background: rgba(0, 229, 255, 0.12);
+}
+
+.cal-pop-plan-date {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  font-weight: 500;
+  width: 100%;
+}
+
+.cal-pop-plan-count {
+  font-size: 0.6rem;
+  color: var(--cyan-dim);
+  background: rgba(0, 229, 255, 0.08);
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+.cal-pop-plan-preview {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

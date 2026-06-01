@@ -1,0 +1,113 @@
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+  cursor: pointer;
+}
+
+.task-item:hover {
+  background: rgba(0, 229, 255, 0.04);
+}
+
+.task-item.completed .task-title {
+  text-decoration: line-through;
+  color: var(--text-dim);
+  opacity: 0.6;
+}
+
+.task-item.priority-high {
+  border-left: 3px solid transparent;
+}
+
+.task-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-active);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--success-green);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.task-checkbox:hover {
+  border-color: var(--cyan-primary);
+  background: rgba(0, 229, 255, 0.08);
+}
+
+.task-item.completed .task-checkbox {
+  border-color: var(--success-green);
+  background: rgba(0, 230, 118, 0.1);
+}
+
+.task-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-title {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.task-meta {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: 1px;
+}
+
+.task-time {
+  font-size: 0.65rem;
+  color: var(--cyan-dim);
+  font-family: var(--font-mono);
+}
+
+.task-category {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0 6px;
+  border-radius: 8px;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.task-item:hover .task-actions {
+  opacity: 1;
+}
+
+.task-priority-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.task-priority-dot.priority-high { background: var(--danger-red); }
+.task-priority-dot.priority-medium { background: var(--warning-amber); }
+.task-priority-dot.priority-low { background: var(--cyan-dim); }
+
+.task-delete-btn {
+  color: var(--text-dim);
+  padding: 2px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast);
+}
+
+.task-delete-btn:hover {
+  color: var(--danger-red);
+}

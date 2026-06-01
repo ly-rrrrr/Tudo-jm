@@ -1,0 +1,118 @@
+.day-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-xs);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  min-height: 64px;
+  cursor: pointer;
+}
+
+.day-cell:hover {
+  background: rgba(0, 229, 255, 0.04);
+  border-color: var(--border-subtle);
+}
+
+.day-cell.other-month .day-cell-num {
+  color: var(--text-dim);
+  opacity: 0.35;
+}
+
+.day-cell.today .day-cell-num {
+  color: var(--cyan-primary);
+  font-weight: 700;
+  text-shadow: 0 0 6px var(--cyan-glow);
+}
+
+.day-cell.today {
+  border-color: var(--border-active);
+  animation: glow-pulse-subtle 3s ease-in-out infinite;
+}
+
+.day-cell.selected {
+  background: rgba(0, 229, 255, 0.1);
+  border-color: var(--border-glow);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.15), inset 0 0 8px rgba(0, 229, 255, 0.04);
+}
+
+.day-cell-num {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.day-cell-dots {
+  display: flex;
+  gap: 3px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.dot.priority-high { background: var(--danger-red); box-shadow: 0 0 4px var(--danger-glow); }
+.dot.priority-medium { background: var(--warning-amber); }
+.dot.priority-low { background: var(--cyan-dim); }
+.dot.all-complete { background: var(--success-green); box-shadow: 0 0 4px var(--success-green); }
+
+.dot.overdue {
+  background: var(--danger-red);
+  box-shadow: 0 0 6px var(--danger-glow);
+  animation: glow-pulse 1.5s ease-in-out infinite;
+}
+
+.dot.done {
+  opacity: 0.5;
+}
+
+.day-cell.has-overdue {
+  border-color: rgba(255, 61, 0, 0.25);
+}
+
+.day-cell.has-overdue:hover {
+  border-color: rgba(255, 61, 0, 0.5);
+  background: rgba(255, 61, 0, 0.04);
+}
+
+.dot-more {
+  font-size: 0.55rem;
+  color: var(--text-dim);
+  line-height: 1;
+}
+
+.day-cell.compact {
+  min-height: unset;
+  aspect-ratio: 1;
+  padding: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.day-cell.compact .day-cell-num {
+  font-size: 0.7rem;
+}
+
+.compact-dot {
+  position: absolute;
+  bottom: 2px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--cyan-primary);
+}
+
+.compact-dot.overdue {
+  background: var(--danger-red);
+  box-shadow: 0 0 4px var(--danger-glow);
+}
+
+.compact-dot.all-done {
+  background: var(--success-green);
+}

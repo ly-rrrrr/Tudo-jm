@@ -1,0 +1,43 @@
+.settings-modal {
+  max-width: 440px;
+}
+
+.settings-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.settings-label {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.settings-options {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.settings-opt {
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.settings-opt:hover {
+  background: rgba(0, 229, 255, 0.06);
+  color: var(--text-primary);
+}
+
+.settings-opt.active {
+  background: rgba(0, 229, 255, 0.12);
+  color: var(--cyan-primary);
+  border-color: var(--border-active);
+}

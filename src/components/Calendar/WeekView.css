@@ -1,0 +1,117 @@
+.week-view {
+  background: var(--void-blue);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.week-header {
+  display: grid;
+  grid-template-columns: 60px repeat(7, 1fr);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.week-time-gutter {
+  width: 60px;
+}
+
+.week-day-header {
+  padding: var(--space-sm);
+  text-align: center;
+  border-left: 1px solid var(--border-subtle);
+}
+
+.week-day-header.today .week-day-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--cyan-primary);
+  color: var(--space-black);
+  font-weight: 700;
+}
+
+.week-day-name {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.week-day-num {
+  display: inline-block;
+  font-size: var(--text-lg);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.week-body {
+  display: flex;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.week-time-column {
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.week-hour-label {
+  height: 48px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding-right: var(--space-sm);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  position: relative;
+  top: -6px;
+}
+
+.week-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(24, 48px);
+  flex: 1;
+}
+
+.week-hour-slot {
+  border-left: 1px solid var(--border-subtle);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.week-hour-slot:hover {
+  background: rgba(0, 229, 255, 0.06);
+}
+
+.week-task-block {
+  position: absolute;
+  background: rgba(0, 229, 255, 0.12);
+  border-left: 3px solid var(--cyan-primary);
+  border-radius: 3px;
+  padding: 2px 6px;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 2;
+  transition: background var(--transition-fast);
+}
+
+.week-task-block:hover {
+  background: rgba(0, 229, 255, 0.2);
+}
+
+.week-task-block.priority-high { border-left-color: var(--danger-red); background: rgba(255, 61, 0, 0.12); }
+.week-task-block.priority-medium { border-left-color: var(--warning-amber); background: rgba(255, 171, 0, 0.1); }
+
+.week-task-title {
+  font-size: 0.65rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
